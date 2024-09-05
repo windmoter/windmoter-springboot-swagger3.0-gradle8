@@ -1,0 +1,14 @@
+
+# 특정 파일 제외
+.project
+
+# 특정 디렉토리 제외
+.gradle/
+.vscode/
+build/
+
+# 모든 .log 파일 제외
+*.log
+
+# 특정 확장자 제외
+*.tm
