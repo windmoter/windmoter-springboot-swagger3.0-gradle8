@@ -7,6 +7,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
+    id 'war'
 }
 
 repositories {
@@ -25,7 +26,7 @@ group = 'com.javainuse'
 version = '0.0.1-SNAPSHOT'
 description = 'boot-swagger-4'
 java.sourceCompatibility = JavaVersion.VERSION_1_8
-
+apply plugin: 'war'
 publishing {
     publications {
         maven(MavenPublication) {
