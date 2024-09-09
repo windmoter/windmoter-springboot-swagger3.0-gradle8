@@ -3,7 +3,7 @@
 
 [versions]
 org-springdoc-springdoc-openapi-ui = "1.2.32"
-org-springframework-boot-spring-boot-starter-web = "2.2.8.RELEASE"
+org-springframework-boot-spring-boot-starter-web = "3.2.1"
 
 [libraries]
 org-springdoc-springdoc-openapi-ui = { module = "org.springdoc:springdoc-openapi-ui", version.ref = "org-springdoc-springdoc-openapi-ui" }

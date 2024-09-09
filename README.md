@@ -5,7 +5,9 @@ https://jjam89.tistory.com/271
 시스템 변수 - 편집 클릭 > gradle변경 path
 
 # Swagger Introduction & Examples
- SwaggerSpringDemoApplication.java 실행
+SwaggerSpringDemoApplication.java 실행
+java 17  
+springframework-boot 3.2
 
 
 # UI

@@ -5,11 +5,14 @@
  */
 
 plugins {
+    id 'org.springframework.boot' version '3.2.1' // 버전은 사용 중인 Spring Boot 버전으로 변경 
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
     id 'java-library'
     id 'maven-publish'
     id 'war'
 }
-
+ 
 repositories {
     mavenLocal()
     maven {
@@ -19,15 +22,16 @@ repositories {
 
 dependencies {
     api libs.org.springdoc.springdoc.openapi.ui
-    api libs.org.springframework.boot.spring.boot.starter.web
+    api libs.org.springframework.boot.spring.boot.starter.web 
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.14' // 최신 버전으로 변경
 }
 
 group = 'com.javainuse'
 version = '0.0.1-SNAPSHOT'
 description = 'boot-swagger-4'
-java.sourceCompatibility = JavaVersion.VERSION_1_8
-apply plugin: 'war'
+java.sourceCompatibility = JavaVersion.VERSION_17 
 
+ 
 publishing {
     publications {
         maven(MavenPublication) {
@@ -35,6 +39,7 @@ publishing {
         }
     }
 }
+
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
