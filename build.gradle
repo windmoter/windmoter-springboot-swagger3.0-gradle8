@@ -10,7 +10,7 @@ plugins {
     id 'java'
     id 'java-library'
     id 'maven-publish'
-    id 'war'
+   // id 'war'
 }
  
 repositories {
@@ -40,6 +40,9 @@ publishing {
     }
 }
 
+tasks.named('jar') {
+	enabled = false
+}
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'

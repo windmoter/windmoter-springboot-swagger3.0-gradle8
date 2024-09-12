@@ -1,43 +1,64 @@
-pipeline {
+pipeline{ 
     agent any
-
-    stages {
-        stage('Checkout---') {
+    environment {
+        SCRIPT_PATH = '/var/jenkins_home/custom/snapcampus'
+    }
+    tools {
+        gradle 'gradle 8.6'
+    }
+    stages{
+        stage('Start') {
             steps {
-                // GitHub 저장소에서 코드 체크아웃
-                git 'https://github.com/windmoter/springboot-swagger3.0.git'
+                echo 'Pipeline ...go'
             }
         }
-
-        stage('Build---') {
+        stage('Checkout') {
             steps {
-                // Maven을 사용하여 빌드
-                sh 'mvn clean package'
+                echo 'Checkout...'
+                checkout scm
             }
         }
-
-        stage('Test---') {
+        stage('Prepare'){
             steps {
-                // Maven을 사용하여 테스트 실행
-                sh 'mvn test'
+                echo 'Prepare...'
+                sh 'gradle clean'
             }
         }
-
+        stage('Replace Prod Properties') {
+            steps {
+                echo 'Replace Prod Properties...'
+                withCredentials([file(credentialsId: 'snapCampusProd', variable: 'snapCampusProd')]) {
+                    script {
+                        sh 'cp $snapCampusProd ./src/main/resources/application-prod.yml'
+                    }
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Build..'
+                sh 'gradle build -x test'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Test..'
+                sh 'gradle test'
+            }
+        }
         stage('Deploy') {
             steps {
-                // 배포 단계 (예: AWS S3에 업로드)
-                echo 'Deploying application...'
-                // 배포 명령어 추가
+                echo 'Deploy..'
+                sh '''
+                    cp ./docker/docker-compose.blue.yml ${SCRIPT_PATH}
+                    cp ./docker/docker-compose.green.yml ${SCRIPT_PATH}
+                    cp ./docker/Dockerfile ${SCRIPT_PATH}
+                    cp ./scripts/deploy.sh ${SCRIPT_PATH}
+                    cp ./build/libs/*.jar ${SCRIPT_PATH}
+                    chmod +x ${SCRIPT_PATH}/deploy.sh
+                    ${SCRIPT_PATH}/deploy.sh
+                '''
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Build and deployment succeeded!'
-        }
-        failure {
-            echo 'Build or deployment failed.'
         }
     }
 }
