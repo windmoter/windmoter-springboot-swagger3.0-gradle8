@@ -22,11 +22,12 @@ gradle clean
 gradle build 
 
 # jenkins 설정
-General > GitHub project
-    > Project url : https://github.com/windmoter/windmoter-springboot-swagger3.0-gradle8.git/
-소스 코드 관리 > git > Repositories
-    > Repository URL : https://github.com/windmoter/windmoter-springboot-swagger3.0-gradle8.git
-    > Credentials : github 설정 pem 키 계정 선택
+'''
+General > GitHub project  
+    > Project url : https://github.com/windmoter/windmoter-springboot-swagger3.0-gradle8.git/  
+소스 코드 관리 > git > Repositories  
+    > Repository URL : https://github.com/windmoter/windmoter-springboot-swagger3.0-gradle8.git  
+    > Credentials : github 설정 pem 키 계정 선택  
 소스 코드 관리 > git > Branches to build
     > Branch Specifier (blank for 'any') : */main
 빌드 유발 >  GitHub hook trigger for GITScm polling : 체크
@@ -73,3 +74,6 @@ http://172.26.92.250/employees
 
 
 # pipline TEST
+pipline git webhook url  : http://172.26.92.250:9060/github-webhook/ (외부에서 호출 되야함) 호출하여 Jenkinsfile 파일 deploy 처리 한다
+docker ps 체크로 blue green 배포  :  delpoy.sh
+netstat port 체크로 blue green 배포  :  delpoy_port.sh
