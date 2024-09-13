@@ -71,3 +71,5 @@ sudo docker push kandlstleo/jenkins-custom-user:latest
 # servier  접속
 http://172.26.92.250/employees
 
+
+# pipline TEST
