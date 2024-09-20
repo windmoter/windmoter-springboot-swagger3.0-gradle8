@@ -78,4 +78,4 @@ pipline git webhook url  : http://172.26.92.250:9060/github-webhook/ (외부에�
 docker ps 체크로 blue green 배포  :  delpoy.sh  
 netstat port 체크로 blue green 배포  :  delpoy_port.sh  
 
-![My Image](./src/resources/docker.png)
+![docker Image](./src/main/resources/docker.PNG) 
