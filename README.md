@@ -79,3 +79,9 @@ docker ps 체크로 blue green 배포  :  delpoy.sh
 netstat port 체크로 blue green 배포  :  delpoy_port.sh  
 
 ![docker Image](./src/main/resources/docker.PNG) 
+
+
+#Github Action  CI/CD  
+github/workflows/gradle-publish.yml  
+빌드 > dockerhub  적재
+
