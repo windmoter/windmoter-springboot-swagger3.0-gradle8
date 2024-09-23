@@ -1,6 +1,9 @@
  name: CD with Gradle
  # 언제 이 파일의 내용이 실행될 것인지 정의합니다. 
  # 여기서는 main 브랜치에 코드가 push 되거나 pull_request되었을 때 실행할 것을 말하고 있습니다.
+ ############################
+ #  https://velog.io/@tilsong/%EC%BD%94%EB%93%9C-Push%EB%A1%9C-%EB%B0%B0%ED%8F%AC%EA%B9%8C%EC%A7%80-Github-Actions-Docker ###
+ ############################
  on:
    push:
      branches: [ "main" ]
@@ -43,12 +46,16 @@
      - name: Docker build & push to docker repo
        run: |
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            docker build -f Dockerfile -t ${{ secrets.DOCKER_REPO }} .
-            docker push ${{ secrets.DOCKER_REPO }}
+            docker build -f Dockerfile -t ${{ secrets.DOCKER_REPO }}/directors-dev .
+            docker push ${{ secrets.DOCKER_REPO }}/directors-dev
 
    # appleboy/ssh-action@master 액션을 사용하여 지정한 서버에 ssh로 접속하고, script를 실행합니다.
    # script의 내용은 도커의 기존 프로세스들을 제거하고, docker repo로부터 방금 위에서 push한 내용을 pull 받아 실행하는 것입니다. 
    # 실행 시, docker-compose를 사용합니다.
+ ############################
+ # Deploy to server 세팅은 HOST  ,KEY 대해서 접속이 불확실하여 빌드까지만 하고 다음 단계는  여러서버가 있는 케이스로 넘어간다.
+ # 아래 코드는 참고만 하길...
+ ############################
      - name: Deploy to server
        uses: appleboy/ssh-action@master
        id: deploy
